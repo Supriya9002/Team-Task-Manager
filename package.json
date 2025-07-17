@@ -1,12 +1,13 @@
 {
   "name": "000.-team-task-manager",
   "version": "1.0.0",
-  "description": "",
+  "description": "Team task manager backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node-dev server.ts",
-    "dev": "ts-node-dev --respawn --transpile-only server.ts"
+    "start": "node dist/server.js",
+    "dev": "nodemon",
+    "tsdev": "ts-node-dev --respawn --transpile-only server.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +27,8 @@
     "@types/express": "^5.0.3",
     "@types/node": "^24.0.14",
     "@types/socket.io": "^3.0.1",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   }
