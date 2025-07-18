@@ -2,8 +2,8 @@ import http from "http";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { Server as SocketIOServer } from "socket.io";
-import socketHandler from "./src/sockets/socketHandler.js"; // Note: .js extension
-import app from "./app.js"; // Note: .js extension
+import socketHandler from "./src/sockets/socketHandler.js"; 
+import app from "./app.js"; 
 
 dotenv.config();
 
