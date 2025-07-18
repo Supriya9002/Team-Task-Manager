@@ -2,26 +2,31 @@ import http from "http";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { Server as SocketIOServer } from "socket.io";
-import app from "./app";
-import socketHandler from "./src/sockets/socketHandler";
+import socketHandler from "./src/sockets/socketHandler.js"; // Note: .js extension
+import app from "./app.js"; // Note: .js extension
 
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI!;
+const MONGO_URI = process.env.MONGO_URI;
 
-// Create HTTP server from Express app
+if (!MONGO_URI) {
+  console.error("❌ MONGO_URI is not defined in environment variables");
+  process.exit(1);
+}
+
+// HTTP server
 const server = http.createServer(app);
 
-// Setup Socket.IO
+// Socket.IO setup
 const io = new SocketIOServer(server, {
   cors: {
-    origin: "*", // or use specific frontend domain
+    origin: "*",
     credentials: true,
   },
 });
 
-// Handle all socket logic in separate file
+// Call socket logic
 socketHandler(io);
 
 // Connect to MongoDB and start server
@@ -35,4 +40,5 @@ mongoose
   })
   .catch((err) => {
     console.error("❌ MongoDB connection failed:", err);
+    process.exit(1);
   });
